@@ -1,0 +1,36 @@
+<idea-plugin>
+    <id>com.austinv11.bio</id>
+    <name>BioTools</name>
+    <version>1.0</version>
+    <vendor email="austinv11@gmail.com" url="https://github.com/austinv11">austinv11</vendor>
+
+    <description><![CDATA[
+      Integration for common bioinformatic uses.<br>
+      Features include:
+      <ul>
+        <li>FASTA file support</li>
+      </ul>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      Initial release!
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="145.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileTypeFactory implementation="com.austinv11.bio.lang.BioFileTypeFactory"/>
+        <lang.parserDefinition language="Generic Fasta" implementationClass="com.austinv11.bio.lang.fasta.FastaParserDefinition"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+</idea-plugin>

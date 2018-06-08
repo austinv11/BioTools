@@ -1,0 +1,34 @@
+{
+  parserClass="com.austinv11.bio.lang.fasta.FastaParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Fasta"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.austinv11.bio.lang.fasta.psi"
+  psiImplPackage="com.austinv11.bio.lang.fasta.psi.impl"
+
+  elementTypeHolderClass="com.austinv11.bio.lang.fasta.psi.FastaTypes"
+  elementTypeClass="com.austinv11.bio.lang.fasta.psi.FastaElementType"
+  tokenTypeClass="com.austinv11.bio.lang.fasta.psi.FastaTokenType"
+
+  tokens = [
+          IDENTIFIER = 'regexp:(.)+'
+          START = 'regexp:([>;])(\s)?'
+//          WHITE_SPACE = 'regexp:\s+'
+//          NEW_LINE = 'regexp:(\r\n)|(\n)'
+          //See https://en.wikipedia.org/wiki/FASTA_format#Sequence_representation
+          GENERIC_FASTA = 'regexp:([a-zA-Z*\-?])+'
+      ]
+}
+
+FastaFile ::= !<<eof>> Definition
+Definition ::= Header? Content
+
+Header ::= Properties?
+Content ::= SequenceLine*
+
+//We are not supporting multi line comments as it poses issues when dealing with multi sequence files
+Properties ::= START IDENTIFIER?
+
+SequenceLine ::= GENERIC_FASTA '*'?

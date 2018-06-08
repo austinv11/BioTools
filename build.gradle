@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven { url 'https://jitpack.io'}
+    }
+    dependencies {
+        classpath "gradle.plugin.org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.3.2"
+        classpath "com.github.JetBrains:gradle-grammar-kit-plugin:2018.1.2"
+    }
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'org.jetbrains.grammarkit'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+import org.jetbrains.grammarkit.tasks.*
+
+group 'com.austinv11.bio'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+intellij {
+    version = '2018.1'
+    downloadSources = true
+    updateSinceUntilBuild = false
+    pluginName 'BioTools'
+    plugins 'coverage'
+}
+
+sourceSets {
+    main {
+        java.srcDirs "src", "gen"
+        resources.srcDirs "resources"
+    }
+}
